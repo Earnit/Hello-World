@@ -5,13 +5,18 @@
 extern "C" {
 #endif
 
+#include "common.h"
+
+static unsigned int my_val = 34;
+
 typedef struct {
-    unsigned int (* size) (void *);
-    unsigned char (* empty) (void *);
-/*    front
-    back
-    push
-    pop*/
+    U32 capacity;
+    U32 (* size) (void *); /* Return size */
+    U8 (* empty) (void *); /* Test whether container is empty */
+    void* (* front) (void *); /* Access next element */
+    void* (* back) (void *); /* Access last element */
+    void (* push) (void* , void *);  /* Insert element. args: Queue , element */
+    void (* pop) (void *); /* Delete next element */
 } Queue;
 
 Queue newQueue(void);
