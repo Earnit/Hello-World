@@ -5,6 +5,16 @@
 extern "C" {
 #endif
 
+typedef struct {
+    unsigned int (* size) (void *);
+    unsigned char (* empty) (void *);
+/*    front
+    back
+    push
+    pop*/
+} Queue;
+
+Queue newQueue(void);
 
 #if __cplusplus
 }; // extern "C"
