@@ -3,7 +3,7 @@ CFLAGS=-Wall -O0
 LDFLAGS=
 
 TARGET=helloworld
-OBJECTS=main.o fifo.o
+OBJECTS=main.o fifo.o filo.o
 
 ALL=$(TARGET)
 
