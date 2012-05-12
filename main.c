@@ -15,16 +15,18 @@ int main(void) {
     int i = 0;
 
     LIST_HEAD(my_top_list);
-    kool_list_t *element;
+
 
     for (i = 0; i < 5; i++) {
+        kool_list_t *element;
 	element = malloc(sizeof(kool_list_t));
 	element->data = i;
 	list_add(&element->list, &my_top_list);
     }
 
-    list_for_each_entry(element, &my_top_list, list)
-	printf("data: %d\n", element->data);
+    kool_list_t *nelement;
+    list_for_each_entry(nelement, &my_top_list, list)
+	printf("data: %d\n", nelement->data);
    
     return 0;
 }
