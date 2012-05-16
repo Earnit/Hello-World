@@ -11,6 +11,7 @@ typedef struct kool_list {
 } kool_list_t;
 
 void list_basic_print(kool_list_t *list);
+void list_basic_print_simple(kool_list_t *list);
 void list_basic_add(kool_list_t *list);  
 
 
@@ -23,6 +24,7 @@ int main(void) {
 
     list_basic_add(&my_list);
     list_basic_print(&my_list);
+    list_basic_print_simple(&my_list);
    
     return 0;
 }
@@ -37,7 +39,7 @@ void list_basic_add(kool_list_t *list) {
     for (i = 0; i < 5; i++) {
 	element = malloc(sizeof(kool_list_t));
 	element->data = i;
-	list_add(&element->list, &list->list);
+	list_add_tail(&element->list, &list->list);
     }
 }
 
@@ -49,4 +51,17 @@ void list_basic_print(kool_list_t *list) {
 
     list_for_each_entry(element, &list->list, list)
     printf("data: %d\n", element->data);
+}
+
+/**
+ * Try to use another for each
+ */ 
+void list_basic_print_simple(kool_list_t *list) {
+    struct list_head *pos;
+    kool_list_t *element;
+    
+    list_for_each(pos, &list->list) {
+        element = list_entry(pos, kool_list_t, list); 
+        printf("determ data: %d\n", element->data);
+    }
 }
