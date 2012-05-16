@@ -10,24 +10,43 @@ typedef struct kool_list {
 	struct list_head list;
 } kool_list_t;
 
+void list_basic_print(kool_list_t *list);
+void list_basic_add(kool_list_t *list);  
+
+
+/**
+ * MAIN func, create list & print it
+ */
 int main(void) {
+    kool_list_t my_list;
+    INIT_LIST_HEAD(&(my_list.list));
 
-    int i = 0;
-
-    LIST_HEAD(my_top_list);
-
-
-    for (i = 0; i < 5; i++) {
-        kool_list_t *element;
-	element = malloc(sizeof(kool_list_t));
-	element->data = i;
-	list_add(&element->list, &my_top_list);
-    }
-
-    kool_list_t *nelement;
-    list_for_each_entry(nelement, &my_top_list, list)
-	printf("data: %d\n", nelement->data);
+    list_basic_add(&my_list);
+    list_basic_print(&my_list);
    
     return 0;
 }
 
+/**
+ * Add elements to list
+ */
+void list_basic_add(kool_list_t *list) {
+    int i;
+    kool_list_t *element;
+
+    for (i = 0; i < 5; i++) {
+	element = malloc(sizeof(kool_list_t));
+	element->data = i;
+	list_add(&element->list, &list->list);
+    }
+}
+
+/**
+ * Print elements from list
+ */
+void list_basic_print(kool_list_t *list) {
+    kool_list_t *element;
+
+    list_for_each_entry(element, &list->list, list)
+    printf("data: %d\n", element->data);
+}
